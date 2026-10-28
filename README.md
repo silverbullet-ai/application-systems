@@ -9,6 +9,7 @@
   <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android" />
   <img src="https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="Visual Studio Code" />
   <img src="https://img.shields.io/badge/IntelliJ_IDEA-000000?style=for-the-badge&logo=intellijidea&logoColor=white" alt="IntelliJ IDEA" />
+  <img src="https://img.shields.io/badge/PyCharm-000000?style=for-the-badge&logo=pycharm&logoColor=white" alt="PyCharm" />
 </p>
 
 ## Overview
@@ -37,7 +38,7 @@ The technologies and tools used across projects may include:
 | Programming Languages | Python, Java |
 | Version Control | Git, GitHub |
 | Mobile Development | Android |
-| IDEs & Editors | Visual Studio Code, IntelliJ IDEA |
+| IDEs & Editors | Visual Studio Code, IntelliJ IDEA, PyCharm |
 | Development Environments | Python virtual environments, Java JDK |
 
 *The technology stack may vary depending on the requirements of each application.*
