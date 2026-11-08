@@ -1,0 +1,94 @@
+/* Diya Flame Animation */
+
+.flame {
+    animation: flicker 1.3s ease-in-out infinite alternate;
+}
+
+.diya:nth-child(2) .flame {
+    animation-delay: 0.3s;
+}
+
+.diya:nth-child(3) .flame {
+    animation-delay: 0.6s;
+}
+
+@keyframes flicker {
+
+    0% {
+        transform: scale(1) rotate(-4deg);
+        opacity: 0.85;
+    }
+
+    50% {
+        transform: scale(1.12) rotate(4deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0.94) rotate(-2deg);
+        opacity: 0.9;
+    }
+
+}
+
+
+/* Greeting Reveal */
+
+.greeting-card:not([hidden]) {
+    animation: reveal 0.9s ease forwards;
+}
+
+@keyframes reveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* Floating Golden Particles */
+
+.particle {
+    position: fixed;
+    bottom: -15px;
+
+    border-radius: 50%;
+
+    background: #ffd779;
+    box-shadow: 0 0 10px #ffcc66;
+
+    pointer-events: none;
+
+    animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+
+    to {
+        transform: translateY(-110vh);
+        opacity: 0;
+    }
+
+}
+
+
+/* Reduced Motion Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+
+}

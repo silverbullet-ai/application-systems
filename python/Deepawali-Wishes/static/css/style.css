@@ -1,0 +1,292 @@
+/* General Reset */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Page Background */
+
+body {
+    min-height: 100vh;
+    font-family: Georgia, serif;
+    color: #fff0d0;
+
+    background:
+        radial-gradient(ellipse at top, #38204e, transparent 55%),
+        linear-gradient(135deg, #100d20, #21132e 60%, #100d20);
+
+    overflow-x: hidden;
+}
+
+
+/* Main Container */
+
+.container {
+    position: relative;
+    z-index: 1;
+
+    width: min(90%, 850px);
+    margin: auto;
+
+    padding: 55px 20px 30px;
+    text-align: center;
+}
+
+
+/* Header */
+
+.hero h1 {
+    color: #ffd779;
+
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+
+    margin: 20px 0 8px;
+
+    text-shadow: 0 0 25px #ffb52e80;
+}
+
+.hero h2 {
+    color: #ffe8b5;
+    font-size: 1.7rem;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    letter-spacing: 5px;
+    font-size: 0.75rem;
+    color: #d5a75c;
+    margin-top: 30px;
+}
+
+.description {
+    max-width: 500px;
+    margin: auto;
+
+    line-height: 1.8;
+    color: #d8c9dc;
+}
+
+
+/* Diyas */
+
+.diya-row {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    gap: 35px;
+    margin-bottom: 20px;
+}
+
+.diya {
+    position: relative;
+
+    width: 65px;
+    height: 75px;
+
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.lamp {
+    width: 65px;
+    height: 30px;
+
+    border-radius: 10px 10px 50% 50%;
+
+    background: linear-gradient(#f8cb70, #a94e17);
+
+    box-shadow: 0 0 25px #ffae35a0;
+}
+
+.flame {
+    position: absolute;
+    bottom: 28px;
+
+    width: 17px;
+    height: 30px;
+
+    background: linear-gradient(to top, #ff6b00, #fff0a0);
+
+    border-radius: 50% 50% 45% 45%;
+
+    transform-origin: bottom center;
+
+    filter: drop-shadow(0 0 12px #ffae35);
+}
+
+
+/* Greeting Form */
+
+.greeting-section {
+    margin: 55px auto;
+    max-width: 550px;
+}
+
+#greetingForm {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
+#greetingForm label {
+    font-size: 1.1rem;
+    color: #ffe4ad;
+}
+
+input {
+    padding: 16px;
+
+    border: 1px solid #a67b4e;
+    border-radius: 10px;
+
+    background: #ffffff12;
+    color: white;
+
+    font-size: 1rem;
+    outline: none;
+
+    text-align: center;
+}
+
+input::placeholder {
+    color: #bbaac2;
+}
+
+input:focus {
+    border-color: #ffd779;
+    box-shadow: 0 0 15px #ffd77940;
+}
+
+
+/* Buttons */
+
+button {
+    padding: 15px 22px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: linear-gradient(120deg, #f6ca75, #d99532);
+
+    color: #28182c;
+
+    font-size: 1rem;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px #ffbb4d50;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* Greeting Card */
+
+.greeting-card {
+    margin-top: 35px;
+    padding: 35px 25px;
+
+    border: 1px solid #bd9659;
+    border-radius: 18px;
+
+    background: linear-gradient(145deg, #30203e, #1c152b);
+
+    box-shadow: 0 0 35px #ffb52e25;
+
+    line-height: 1.9;
+}
+
+.greeting-card h2 {
+    color: #ffd779;
+    margin-bottom: 15px;
+}
+
+.greeting-card p {
+    color: #e9dce8;
+    margin: 12px 0;
+}
+
+.card-diya {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.signature {
+    color: #ffd779;
+    font-size: 1.2rem;
+    margin: 25px 0;
+    font-weight: bold;
+}
+
+
+/* Greeting Card Buttons */
+
+.greeting-card button {
+    margin: 5px;
+}
+
+#regenerateButton {
+    background: transparent;
+    border: 1px solid #bd9659;
+    color: #ffe8b5;
+}
+
+
+/* Footer */
+
+footer {
+    margin-top: 60px;
+    color: #a99bb3;
+    font-size: 0.85rem;
+    line-height: 2;
+}
+
+.creator {
+    color: #ffd779;
+    font-weight: bold;
+}
+
+
+/* Hidden Elements */
+
+[hidden] {
+    display: none !important;
+}
+
+
+/* Mobile Responsive Design */
+
+@media (max-width: 480px) {
+
+    .container {
+        padding-top: 35px;
+    }
+
+    .diya-row {
+        gap: 20px;
+    }
+
+    .greeting-card {
+        padding: 25px 17px;
+    }
+
+    .greeting-card button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+}

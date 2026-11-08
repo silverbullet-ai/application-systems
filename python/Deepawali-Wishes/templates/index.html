@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Create beautiful personalised Deepawali greetings for your loved ones.">
+
+    <title>Deepawali Wishes | By Aahish</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/animations.css') }}">
+</head>
+
+<body>
+
+    <div class="particles" id="particles"></div>
+
+    <main class="container">
+
+        <!-- Header -->
+        <header class="hero">
+
+            <div class="diya-row">
+
+                <div class="diya">
+                    <div class="flame"></div>
+                    <div class="lamp"></div>
+                </div>
+
+                <div class="diya">
+                    <div class="flame"></div>
+                    <div class="lamp"></div>
+                </div>
+
+                <div class="diya">
+                    <div class="flame"></div>
+                    <div class="lamp"></div>
+                </div>
+
+            </div>
+
+            <p class="subtitle">THE FESTIVAL OF LIGHTS</p>
+
+            <h1>शुभ दीपावली</h1>
+
+            <h2>Happy Deepawali</h2>
+
+            <p class="description">
+                A little light, a little love,
+                and a personalised wish for someone special.
+            </p>
+
+        </header>
+
+
+        <!-- Greeting Form -->
+        <section class="greeting-section">
+
+            <form id="greetingForm">
+
+                <label for="senderName">Your Name</label>
+
+                <input
+                    type="text"
+                    id="senderName"
+                    placeholder="Who is sending the wish?"
+                    maxlength="50"
+                    autocomplete="name"
+                    required
+                >
+
+                <label for="recipientName">Recipient's Name</label>
+
+                <input
+                    type="text"
+                    id="recipientName"
+                    placeholder="Who is receiving the wish?"
+                    maxlength="50"
+                    required
+                >
+
+                <button type="submit" id="generateButton">
+                    ✨ Generate My Wish
+                </button>
+
+            </form>
+
+
+            <!-- Generated Greeting -->
+            <div id="greetingResult" class="greeting-card" hidden>
+
+                <div class="card-diya">🪔</div>
+
+                <h2 id="greetingTitle"></h2>
+
+                <p id="greetingWish"></p>
+
+                <p id="greetingBlessing"></p>
+
+                <p id="greetingClosing"></p>
+
+                <div class="signature"></div>
+
+                <button type="button" id="copyButton">
+                    Copy Greeting
+                </button>
+
+                <button type="button" id="shareButton">
+                    Share Greeting
+                </button>
+
+                <button type="button" id="regenerateButton">
+                    Generate Another Wish
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- Footer -->
+        <footer>
+
+            <p>Made with ❤️ and a little Python magic.</p>
+
+            <p>© 2026 Deepawali Wishes</p>
+
+            <p class="creator">Created by Aahish</p>
+
+        </footer>
+
+    </main>
+
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/effects.js') }}"></script>
+
+</body>
+
+</html>
