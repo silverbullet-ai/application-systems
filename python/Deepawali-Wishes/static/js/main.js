@@ -1,5 +1,4 @@
 const form = document.getElementById("greetingForm");
-
 const result = document.getElementById("greetingResult");
 
 const senderInput = document.getElementById("senderName");
@@ -10,6 +9,11 @@ const copyButton = document.getElementById("copyButton");
 const shareButton = document.getElementById("shareButton");
 const regenerateButton = document.getElementById("regenerateButton");
 
+const createOwnWishButton =
+    document.getElementById("createOwnWishButton");
+
+const cardActions = document.getElementById("cardActions");
+
 const greetingTitle = document.getElementById("greetingTitle");
 const greetingWish = document.getElementById("greetingWish");
 const greetingBlessing = document.getElementById("greetingBlessing");
@@ -17,6 +21,21 @@ const greetingClosing = document.getElementById("greetingClosing");
 const signature = document.querySelector(".signature");
 
 let currentGreeting = null;
+
+
+/* Display Greeting */
+
+function displayGreeting(message) {
+
+    greetingTitle.textContent = message.greeting;
+    greetingWish.textContent = message.wish;
+    greetingBlessing.textContent = message.blessing;
+    greetingClosing.textContent = message.closing;
+    signature.textContent = message.signature;
+
+    result.hidden = false;
+
+}
 
 
 /* Generate Greeting */
@@ -41,6 +60,8 @@ async function generateGreeting() {
     greetingClosing.textContent = "";
     signature.textContent = "";
 
+    currentGreeting = null;
+
     try {
 
         const response = await fetch("/api/generate", {
@@ -61,18 +82,19 @@ async function generateGreeting() {
         const data = await response.json();
 
         if (!response.ok) {
-            throw new Error(data.error || "Unable to generate greeting.");
+            throw new Error(
+                data.error || "Unable to generate greeting."
+            );
         }
 
         currentGreeting = data.message;
 
-        greetingTitle.textContent = currentGreeting.greeting;
-        greetingWish.textContent = currentGreeting.wish;
-        greetingBlessing.textContent = currentGreeting.blessing;
-        greetingClosing.textContent = currentGreeting.closing;
-        signature.textContent = currentGreeting.signature;
+        displayGreeting(currentGreeting);
 
-        copyButton.textContent = "Copy Greeting";
+        // Show sender actions.
+
+        cardActions.hidden = false;
+        createOwnWishButton.hidden = true;
 
     } catch (error) {
 
@@ -102,7 +124,7 @@ form.addEventListener("submit", async (event) => {
 });
 
 
-/* Regenerate Greeting */
+/* Generate Another Wish */
 
 regenerateButton.addEventListener("click", async () => {
 
@@ -163,47 +185,186 @@ copyButton.addEventListener("click", async () => {
 });
 
 
-/* Share Greeting */
+/* Generate Shareable Link */
+
+function createShareableLink() {
+
+    const sender = senderInput.value.trim();
+    const recipient = recipientInput.value.trim();
+
+    const params = new URLSearchParams({
+
+        sender: sender,
+        recipient: recipient,
+
+        greeting: currentGreeting.greeting,
+        wish: currentGreeting.wish,
+        blessing: currentGreeting.blessing,
+        closing: currentGreeting.closing
+
+    });
+
+    return `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+
+}
+
+
+/* Share Greeting on WhatsApp */
 
 shareButton.addEventListener("click", async () => {
 
-    const text = getGreetingText();
+    if (!currentGreeting) return;
 
-    if (!text) {
+    const sender = senderInput.value.trim();
+    const recipient = recipientInput.value.trim();
+    const shareURL = createShareableLink();
+
+    const whatsappMessage = [
+        `Hey ${recipient}! 😊🪔`,
+        "",
+        `${sender} has created a personalised Deepawali greeting for you!`,
+        "",
+        "Open your greeting card:",
+        "",
+        shareURL,
+        "",
+        "Happy Deepawali! ✨"
+    ].join("\n");
+
+    const whatsappURL =
+        `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappMessage)}`;
+
+    window.open(whatsappURL, "_blank");
+
+});
+
+
+
+/* Load Shared Greeting */
+
+function loadSharedGreeting() {
+
+    const params = new URLSearchParams(window.location.search);
+
+    const sender = params.get("sender");
+    const recipient = params.get("recipient");
+
+    const greeting = params.get("greeting");
+    const wish = params.get("wish");
+    const blessing = params.get("blessing");
+    const closing = params.get("closing");
+
+    // Check for shared greeting parameters.
+
+    if (
+        !sender ||
+        !recipient ||
+        !greeting ||
+        !wish ||
+        !blessing ||
+        !closing
+    ) {
         return;
     }
 
-    if (navigator.share) {
+    // Validate shared content.
 
-        try {
-
-            await navigator.share({
-                title: "Happy Deepawali!",
-                text: text
-            });
-
-        } catch (error) {
-
-            if (error.name !== "AbortError") {
-                console.error("Sharing failed:", error);
-            }
-
-        }
-
-    } else {
-
-        try {
-
-            await navigator.clipboard.writeText(text);
-
-            shareButton.textContent = "Copied! Share it ✨";
-
-        } catch (error) {
-
-            shareButton.textContent = "Sharing unavailable";
-
-        }
-
+    if (
+        sender.length > 50 ||
+        recipient.length > 50 ||
+        greeting.length > 100 ||
+        wish.length > 500 ||
+        blessing.length > 500 ||
+        closing.length > 200
+    ) {
+        return;
     }
 
+    // Hide the greeting creation form.
+
+    form.hidden = true;
+
+    // Restore the original greeting.
+
+    currentGreeting = {
+
+        greeting: greeting,
+        wish: wish,
+        blessing: blessing,
+        closing: closing,
+        signature: `— By ${sender}`
+
+    };
+
+    // Display the greeting card.
+
+    displayGreeting(currentGreeting);
+
+    // Hide sender-only buttons.
+
+    cardActions.hidden = true;
+
+    // Show the create-your-own-wish button.
+
+    createOwnWishButton.hidden = false;
+
+    // Update browser title.
+
+    document.title =
+        `A Deepawali Wish for ${recipient} | By ${sender}`;
+
+}
+
+
+/* Create Your Own Wish */
+
+createOwnWishButton.addEventListener("click", () => {
+
+    // Clear the previous greeting.
+
+    currentGreeting = null;
+
+    result.hidden = true;
+
+    // Restore the creation form.
+
+    form.hidden = false;
+
+    // Hide recipient-only action.
+
+    createOwnWishButton.hidden = true;
+
+    // Restore sender actions for the next greeting.
+
+    cardActions.hidden = false;
+
+    // Clear previous names.
+
+    senderInput.value = "";
+    recipientInput.value = "";
+
+    // Reset browser URL to the homepage.
+
+    window.history.replaceState(
+        {},
+        document.title,
+        window.location.pathname
+    );
+
+    // Restore original page title.
+
+    document.title = "Deepawali Wishes | By Aahish";
+
+    // Bring the form into view.
+
+    form.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
 });
+
+
+/* Initialise Shared Greeting */
+
+loadSharedGreeting();

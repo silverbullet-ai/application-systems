@@ -3,28 +3,41 @@
 
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-          content="Create beautiful personalised Deepawali greetings for your loved ones.">
+          content="Create and share personalised Deepawali greetings with your loved ones.">
 
     <title>Deepawali Wishes | By Aahish</title>
+
+    <!-- CSS Stylesheets -->
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/animations.css') }}">
+
 </head>
 
 <body>
 
+    <!-- Floating Golden Particles -->
+
     <div class="particles" id="particles"></div>
+
 
     <main class="container">
 
-        <!-- Header -->
+
+        <!-- ============================= -->
+        <!-- HEADER SECTION                -->
+        <!-- ============================= -->
+
         <header class="hero">
+
+            <!-- Animated Diyas -->
 
             <div class="diya-row">
 
@@ -45,7 +58,10 @@
 
             </div>
 
-            <p class="subtitle">THE FESTIVAL OF LIGHTS</p>
+
+            <p class="subtitle">
+                THE FESTIVAL OF LIGHTS
+            </p>
 
             <h1>शुभ दीपावली</h1>
 
@@ -59,12 +75,17 @@
         </header>
 
 
-        <!-- Greeting Form -->
+        <!-- ============================= -->
+        <!-- GREETING CREATION FORM        -->
+        <!-- ============================= -->
+
         <section class="greeting-section">
 
             <form id="greetingForm">
 
-                <label for="senderName">Your Name</label>
+                <label for="senderName">
+                    Your Name
+                </label>
 
                 <input
                     type="text"
@@ -75,7 +96,10 @@
                     required
                 >
 
-                <label for="recipientName">Recipient's Name</label>
+
+                <label for="recipientName">
+                    Recipient's Name
+                </label>
 
                 <input
                     type="text"
@@ -85,6 +109,7 @@
                     required
                 >
 
+
                 <button type="submit" id="generateButton">
                     ✨ Generate My Wish
                 </button>
@@ -92,10 +117,23 @@
             </form>
 
 
-            <!-- Generated Greeting -->
-            <div id="greetingResult" class="greeting-card" hidden>
+            <!-- ============================= -->
+            <!-- GENERATED GREETING CARD       -->
+            <!-- ============================= -->
 
-                <div class="card-diya">🪔</div>
+            <div id="greetingResult"
+                 class="greeting-card"
+                 hidden>
+
+
+                <!-- Card Decoration -->
+
+                <div class="card-diya">
+                    🪔
+                </div>
+
+
+                <!-- Personalised Greeting -->
 
                 <h2 id="greetingTitle"></h2>
 
@@ -105,42 +143,83 @@
 
                 <p id="greetingClosing"></p>
 
+
+                <!-- Dynamic Sender Signature -->
+
                 <div class="signature"></div>
 
-                <button type="button" id="copyButton">
-                    Copy Greeting
+
+                <!-- ============================= -->
+                <!-- SENDER ACTIONS                -->
+                <!-- ============================= -->
+
+                <div id="cardActions">
+
+                    <button type="button" id="copyButton">
+                        📋 Copy Greeting
+                    </button>
+
+                    <button type="button" id="shareButton">
+                        💚 Share on WhatsApp
+                    </button>
+
+                    <button type="button" id="regenerateButton">
+                        ✨ Generate Another Wish
+                    </button>
+
+                </div>
+
+
+                <!-- ============================= -->
+                <!-- RECIPIENT ACTION              -->
+                <!-- ============================= -->
+
+                <button
+                    type="button"
+                    id="createOwnWishButton"
+                    hidden
+                >
+                    ✨ Create Your Own Wish
                 </button>
 
-                <button type="button" id="shareButton">
-                    Share Greeting
-                </button>
-
-                <button type="button" id="regenerateButton">
-                    Generate Another Wish
-                </button>
 
             </div>
 
         </section>
 
 
-        <!-- Footer -->
+        <!-- ============================= -->
+        <!-- FOOTER                        -->
+        <!-- ============================= -->
+
         <footer>
 
-            <p>Made with ❤️ and a little Python magic.</p>
+            <p>
+                Made with ❤️ and a little Python magic.
+            </p>
 
-            <p>© 2026 Deepawali Wishes</p>
+            <p>
+                © 2026 Deepawali Wishes
+            </p>
 
-            <p class="creator">Created by Aahish</p>
+            <p class="creator">
+                Created by Aahish
+            </p>
 
         </footer>
+
 
     </main>
 
 
+    <!-- ============================= -->
+    <!-- JAVASCRIPT FILES               -->
+    <!-- ============================= -->
+
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
     <script src="{{ url_for('static', filename='js/effects.js') }}"></script>
+
 
 </body>
 
