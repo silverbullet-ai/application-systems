@@ -1,3 +1,4 @@
+
 const form = document.getElementById("greetingForm");
 const result = document.getElementById("greetingResult");
 
@@ -204,6 +205,9 @@ function createShareableLink() {
 
     });
 
+    // Automatically uses localhost during local testing
+    // and the production domain after deployment.
+
     return `${window.location.origin}${window.location.pathname}?${params.toString()}`;
 
 }
@@ -211,12 +215,13 @@ function createShareableLink() {
 
 /* Share Greeting on WhatsApp */
 
-shareButton.addEventListener("click", async () => {
+shareButton.addEventListener("click", () => {
 
     if (!currentGreeting) return;
 
     const sender = senderInput.value.trim();
     const recipient = recipientInput.value.trim();
+
     const shareURL = createShareableLink();
 
     const whatsappMessage = [
@@ -224,8 +229,7 @@ shareButton.addEventListener("click", async () => {
         "",
         `${sender} has created a personalised Deepawali greeting for you!`,
         "",
-        "Open your greeting card:",
-        "",
+        `See your wish, ${recipient}! ✨`,
         shareURL,
         "",
         "Happy Deepawali! ✨"
@@ -237,7 +241,6 @@ shareButton.addEventListener("click", async () => {
     window.open(whatsappURL, "_blank");
 
 });
-
 
 
 /* Load Shared Greeting */
